@@ -48,4 +48,4 @@ Budgets (attribute points, skill points, max Hindrance points, free Edge slots, 
 
 ## Releasing
 
-Tag `vX.Y.Z` and push the tag. The GitHub Action stamps the version, zips the module, and attaches `module.json` + `module.zip` to the release. Forge/Foundry pick up the new version from the `releases/latest` manifest.
+Bump `"version"` in `module.json` and push to `main`. The GitHub Action sees there is no release for that version yet, tags `vX.Y.Z`, stamps the manifest, zips the module, and attaches `module.json` + `module.zip` to the release. Forge/Foundry pick up the new version from the `releases/latest` manifest. (Pushing a `v*` tag by hand also works.)
