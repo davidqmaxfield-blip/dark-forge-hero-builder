@@ -1,0 +1,146 @@
+{
+ "Agent": {
+  "group": "Brains",
+  "role": "Monster-hunting detective",
+  "tag": "The government knows about the things in the dark. You're the one it sends.",
+  "pick": "You want to drive the mystery forward and still hold your own in a gunfight. Think Pinkerton meets The X-Files."
+ },
+ "Blessed": {
+  "group": "Healer",
+  "role": "Holy healer and protector",
+  "tag": "A higher power works through you. Keep your soul clean and it always will.",
+  "pick": "You like keeping the group alive, having a moral stance that matters, and being the one monsters fear."
+ },
+ "Bounty Hunter": {
+  "group": "Gunhand",
+  "role": "Tracker and ranged killer",
+  "tag": "Dead or alive. You lean toward dead; the paperwork's easier.",
+  "pick": "You want to be the cold professional with the rifle, and you enjoy being the posse's hard edge."
+ },
+ "Chi Master": {
+  "group": "Front Line",
+  "role": "Martial artist and dodger",
+  "tag": "Your fists are faster than their trigger fingers.",
+  "pick": "You want to close distance, dodge bullets, and punch monsters. Kung fu in the Weird West."
+ },
+ "Cowgirl": {
+  "group": "Front Line",
+  "role": "Mounted all-rounder",
+  "tag": "Give you a good horse and open country and there's nothing you can't handle.",
+  "pick": "You want a sturdy, flexible character who's never useless and has a horse that matters."
+ },
+ "Explorer": {
+  "group": "Scout",
+  "role": "Wilderness guide and scholar",
+  "tag": "Vast parts of the West are still blank on the map. You intend to fill them in.",
+  "pick": "You like being the one who knows things and keeps the group alive between the gunfights, and you don't mind a slower hero."
+ },
+ "Gunslinger": {
+  "group": "Gunhand",
+  "role": "Two-gun duelist",
+  "tag": "Two pistols, one reputation. Both loaded.",
+  "pick": "You want to be the iconic Western hero and deal the most bullets per round. Glass cannon with a sense of humor."
+ },
+ "Harrowed": {
+  "group": "Front Line",
+  "role": "Undead tank",
+  "tag": "You died. Something climbed back into the body with you. You're still arguing over who's driving.",
+  "pick": "You want to stand in front, soak damage, and play a dark, morally complicated hero. Not for players who want a clean protagonist."
+ },
+ "Hexslinger": {
+  "group": "Arcane",
+  "role": "Arcane gunfighter",
+  "tag": "Doc Holliday taught the West that a bullet can carry a hex. You learned.",
+  "pick": "You want to shoot things with magic bullets and be the flashy, cocky one. Gunslinger with a spellbook."
+ },
+ "Huckster": {
+  "group": "Arcane",
+  "role": "Card-sharp spellslinger",
+  "tag": "Every hex is a hand of poker played against a demon. You usually win.",
+  "pick": "You want to play the clever, risk-taking caster whose magic is literally a gamble."
+ },
+ "Mad Scientist": {
+  "group": "Arcane",
+  "role": "Gadgeteer and inventor",
+  "tag": "They laughed at you at the academy. They aren't laughing now. They're running.",
+  "pick": "You want to solve problems with inventions, hand your friends gadgets, and roleplay a genius who's slowly coming apart."
+ },
+ "Medicine Woman": {
+  "group": "Healer",
+  "role": "Spirit healer and voice of reason",
+  "tag": "The spirits grant you power to mend and to cloud the senses. Use it well.",
+  "pick": "You want to heal and talk rather than shoot, and you like a hero defined by her principles."
+ },
+ "Metal Mage": {
+  "group": "Arcane",
+  "role": "Occult engineer and blaster",
+  "tag": "Call it science if it comforts you. The whispers in the machine know better.",
+  "pick": "You want crowd control and explosions and don't mind a hero who has made a deal he doesn't fully understand."
+ },
+ "Muckraker": {
+  "group": "Face",
+  "role": "Journalist and investigator",
+  "tag": "If it isn't in print, it didn't happen. You intend to print all of it.",
+  "pick": "You want to be the one asking questions and getting the posse into trouble, and you accept that you'll hide behind the Ranger when the shooting starts."
+ },
+ "Native Scout": {
+  "group": "Scout",
+  "role": "Tracker and sharpshooter",
+  "tag": "Your people taught you the land. The land is teaching you what's wrong with it.",
+  "pick": "You want to scout ahead, set up the ambush instead of walking into it, and shoot from cover."
+ },
+ "Saloon Gal": {
+  "group": "Face",
+  "role": "Charmer and information broker",
+  "tag": "A piano player, a couple of hours, and you'll know every secret this town has buried.",
+  "pick": "You want to win scenes with words, run the posse's network of contacts, and be braver than you look."
+ },
+ "Sawbones": {
+  "group": "Healer",
+  "role": "Frontier doctor and smart-mouth",
+  "tag": "Nasty splinter. Gonna have to take the whole arm. Just kidding. Mostly.",
+  "pick": "You want to be the healer without the religion, and you like a character who talks his way through fear."
+ },
+ "Shaman": {
+  "group": "Arcane",
+  "role": "Spirit warrior and protector",
+  "tag": "The Hunting Grounds have turned terrible. You fight to mend the veil.",
+  "pick": "You want a caster who stands near the front, buffs the fighters, and burns evil spirits."
+ },
+ "Territorial Ranger": {
+  "group": "Front Line",
+  "role": "Armored lawman and tank",
+  "tag": "Desperadoes, scoundrels, and things most folks don't know exist. You handle all three.",
+  "pick": "You want to stand in the doorway, take the hits, and have a badge that lets you say 'official business.'"
+ },
+ "US Marshal": {
+  "group": "Front Line",
+  "role": "Steady lawman and leader",
+  "tag": "Put down that hogleg and we'll settle this peaceful-like. Otherwise, you'll see how I got this job.",
+  "pick": "You want to be the reliable leader who always acts first and never breaks, not the flashiest gun in the room."
+ },
+ "Vaquero": {
+  "group": "Gunhand",
+  "role": "Rider and all-around fighter",
+  "tag": "You've herded cattle across the whole Southwest and seen things you can't explain. You keep riding.",
+  "pick": "You want to fight well at every range, have a horse that matters, and play the loyal heart of the posse."
+ },
+ "Voodooist": {
+  "group": "Healer",
+  "role": "Spirit-channeling support",
+  "tag": "You need some hoodoo? You might know a spirit or two.",
+  "pick": "You want a healer with menace and mystery, and you like your magic flavored by the bayou rather than the pulpit."
+ },
+ "Warrior": {
+  "group": "Front Line",
+  "role": "Melee powerhouse",
+  "tag": "You charge without fear at your enemies, be they man or beast.",
+  "pick": "You want to be the melee monster who wades into a crowd and comes out the other side."
+ },
+ "Witch": {
+  "group": "Arcane",
+  "role": "Hexes, charm, and area damage",
+  "tag": "You'd be surprised how many problems a little abracadabra solves.",
+  "pick": "You want a toolbox of spells, a spirit companion, and a hero with a secret the world wouldn't forgive."
+ }
+}

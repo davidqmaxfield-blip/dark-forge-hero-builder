@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stamp version into module.json
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          REPO="https://github.com/${GITHUB_REPOSITORY}"
+          jq --arg v "$VERSION" --arg repo "$REPO" \
+            '.version = $v
+             | .url = $repo
+             | .manifest = ($repo + "/releases/latest/download/module.json")
+             | .download = ($repo + "/releases/download/v" + $v + "/module.zip")' \
+            module.json > module.json.tmp && mv module.json.tmp module.json
+          cat module.json
+
+      - name: Zip module
+        run: zip -r module.zip module.json scripts templates styles lang data README.md
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            module.json
+            module.zip
+          generate_release_notes: true

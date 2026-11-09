@@ -1,0 +1,65 @@
+<div class="dfhb-picker-layout">
+  <section class="dfhb-left">
+    <div class="dfhb-intro">
+      <p><b>Two ways to make a hero.</b> Click an archetype to see what it's like to play, then <b>Create this hero</b> for a complete, ready-to-play character you can rename and adjust (the published Deadlands archetypes come in at Seasoned rank with 4 advances already spent). Or <b>Build your own</b> to go step by step from Novice, with the point math handled for you.</p>
+      {{#if primerUrl}}<p><a href="{{primerUrl}}" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf"></i> Read the Posse Primer</a> for the full write-ups.</p>{{/if}}
+      <button type="button" class="dfhb-primary" data-action="scratch"><i class="fa-solid fa-hammer"></i> Build your own</button>
+    </div>
+    <div class="dfhb-cards">
+      {{#each groups}}
+      <h3 class="dfhb-group" style="--c:{{color}}">{{name}}</h3>
+      <div class="dfhb-grid">
+        {{#each cards}}
+        <div class="dfhb-card {{#if active}}active{{/if}}" style="--c:{{color}}" data-action="select" data-id="{{id}}" data-tooltip="{{pick}}">
+          <img src="{{img}}" alt="">
+          <div class="dfhb-card-body">
+            <div class="dfhb-name">{{name}}</div>
+            <div class="dfhb-role">{{role}}</div>
+            <div class="dfhb-tag">“{{tag}}”</div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
+  </section>
+
+  <aside class="dfhb-detail" style="--c:{{#if selected}}{{selected.color}}{{else}}#555{{/if}}">
+    {{#if selected}}
+    <div class="dfhb-detail-head">
+      <img src="{{selected.img}}" alt="">
+      <div>
+        <div class="dfhb-detail-group">{{selected.group}}</div>
+        <h2>{{selected.name}}</h2>
+        <div class="dfhb-role">{{selected.role}}</div>
+        <div class="dfhb-dim">{{selected.rank}}{{#if selected.advances}} · {{selected.advances}} advances{{/if}}</div>
+      </div>
+    </div>
+    <div class="dfhb-detail-body">
+      <p class="dfhb-tag">“{{selected.tag}}”</p>
+      {{#if selected.bio}}<p class="dfhb-bio">{{selected.bio}}</p>{{/if}}
+      <p class="dfhb-pick"><b>Pick this if</b> {{selected.pick}}</p>
+      <div class="dfhb-attrs">
+        {{#each selected.attrs}}<div class="dfhb-attr"><span class="k">{{k}}</span><span class="v">{{v}}</span></div>{{/each}}
+      </div>
+      <div class="dfhb-derived"><span><b>Parry</b> {{selected.parry}}</span><span><b>Toughness</b> {{selected.tough}}{{#if selected.armor}} ({{selected.armor}}){{/if}}</span><span><b>Pace</b> 6</span></div>
+      <h5>Best skills</h5><p>{{selected.best}}{{#if selected.good}}<br><span class="dfhb-dim">{{selected.good}}</span>{{/if}}</p>
+      <h5>Edges</h5><p>{{selected.edges}}</p>
+      <h5>Hindrances</h5><p>{{selected.hindrances}}</p>
+      {{#if selected.powers}}<h5>Powers</h5><p>{{selected.powers}}</p>{{/if}}
+      <h5>Weapons</h5><p>{{selected.weapons}}</p>
+      {{#if selected.gear}}<h5>Gear</h5><p>{{selected.gear}}</p>{{/if}}
+    </div>
+    <div class="dfhb-detail-actions">
+      <button type="button" class="dfhb-primary" data-action="create" data-id="{{selected.id}}"><i class="fa-solid fa-check"></i> Create this hero</button>
+      <button type="button" data-action="openSheet" data-id="{{selected.id}}"><i class="fa-solid fa-file-lines"></i> Full sheet</button>
+    </div>
+    {{else}}
+    <div class="dfhb-detail-empty">
+      <i class="fa-solid fa-hat-cowboy"></i>
+      <p>Pick an archetype on the left to see who they are and what they're good at.</p>
+      <p class="dfhb-dim">{{count}} heroes to choose from, grouped by the job they do in a posse.</p>
+    </div>
+    {{/if}}
+  </aside>
+</div>

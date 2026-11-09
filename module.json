@@ -1,0 +1,19 @@
+{
+  "id": "dark-forge-hero-builder",
+  "title": "Dark Forge Hero Builder",
+  "description": "A guided, plain-language character creator for Deadlands: The Weird West on the SWADE system. Pick one of the 24 archetypes or build a hero step by step with live point budgets.",
+  "version": "0.1.0",
+  "authors": [{ "name": "Dave (Dark Forge)" }],
+  "compatibility": { "minimum": "14", "verified": "14" },
+  "relationships": {
+    "systems": [{ "id": "swade", "type": "system", "compatibility": { "minimum": "6" } }]
+  },
+  "esmodules": ["scripts/main.mjs"],
+  "styles": ["styles/dfhb.css"],
+  "languages": [{ "lang": "en", "name": "English", "path": "lang/en.json" }],
+  "url": "https://github.com/davidqmaxfield-blip/dark-forge-hero-builder",
+  "bugs": "https://github.com/davidqmaxfield-blip/dark-forge-hero-builder/issues",
+  "manifest": "https://github.com/davidqmaxfield-blip/dark-forge-hero-builder/releases/latest/download/module.json",
+  "download": "https://github.com/davidqmaxfield-blip/dark-forge-hero-builder/releases/latest/download/module.zip",
+  "flags": { "hotReload": { "extensions": ["css", "hbs", "json"], "paths": ["styles", "templates", "lang"] } }
+}

@@ -1,0 +1,236 @@
+<div class="dfhb-wizard-layout">
+  <nav class="dfhb-steps">
+    {{#each steps}}
+    <button type="button" class="dfhb-step {{#if active}}active{{/if}} {{#if done}}done{{/if}}" data-action="goStep" data-step="{{id}}"><span class="n">{{index}}</span>{{label}}</button>
+    {{/each}}
+  </nav>
+
+  <aside class="dfhb-budgets">
+    <div class="dfhb-budget {{#if (lt budgets.hindrance.left 0)}}bad{{else if (gt budgets.hindrance.left 0)}}warn{{else}}ok{{/if}}"><span class="k">Hindrance pts</span><span class="v">{{budgets.hindrance.have}}/{{budgets.hindrance.max}}</span><span class="s">{{budgets.hindrance.left}} to spend</span></div>
+    <div class="dfhb-budget {{#if (lt budgets.attributes.left 0)}}bad{{else if (gt budgets.attributes.left 0)}}warn{{else}}ok{{/if}}"><span class="k">Attributes</span><span class="v">{{budgets.attributes.left}}</span><span class="s">of {{budgets.attributes.max}} left</span></div>
+    <div class="dfhb-budget {{#if (lt budgets.skills.left 0)}}bad{{else if (gt budgets.skills.left 0)}}warn{{else}}ok{{/if}}"><span class="k">Skills</span><span class="v">{{budgets.skills.left}}</span><span class="s">of {{budgets.skills.max}} left</span></div>
+    <div class="dfhb-budget {{#if (lt budgets.edges.left 0)}}bad{{else if (gt budgets.edges.left 0)}}warn{{else}}ok{{/if}}"><span class="k">Edges</span><span class="v">{{budgets.edges.left}}</span><span class="s">of {{budgets.edges.max}} slots</span></div>
+    <div class="dfhb-budget {{#if (lt budgets.funds.left 0)}}bad{{else}}ok{{/if}}"><span class="k">Money</span><span class="v">${{budgets.funds.left}}</span><span class="s">of ${{budgets.funds.total}}</span></div>
+    <div class="dfhb-derived-box">
+      <div><b>Pace</b> {{derived.pace}}</div><div><b>Parry</b> {{derived.parry}}</div><div><b>Toughness</b> {{derived.toughness}}{{#if derived.armor}} ({{derived.armor}}){{/if}}</div>
+    </div>
+  </aside>
+
+  <section class="dfhb-body">
+    <p class="dfhb-help">{{help}}</p>
+
+    {{!-- ========== CONCEPT ========== --}}
+    {{#if (eq step "concept")}}
+    <div class="dfhb-concept">
+      <div class="dfhb-portrait" data-action="pickImage" data-tooltip="Choose a portrait">
+        {{#if state.img}}<img src="{{state.img}}" alt="">{{else}}<i class="fa-solid fa-image"></i><span>Portrait</span>{{/if}}
+      </div>
+      <div class="dfhb-fields">
+        <label>Name<input type="text" data-field="name" value="{{state.name}}" placeholder="What do folks call you?"></label>
+        <label>Concept<textarea data-field="concept" rows="4" placeholder="One or two lines. A disgraced Union surgeon hiding out in the Territories. A rancher's daughter who saw something in the canyon.">{{state.concept}}</textarea></label>
+        <p class="dfhb-dim">Not sure yet? Pick a job first — gunhand, healer, talker, scout, caster — then let the Hindrances and Edges suggest the rest.</p>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== HINDRANCES ========== --}}
+    {{#if (eq step "hindrances")}}
+    <div class="dfhb-two">
+      <div class="dfhb-chosen">
+        <h4>Your Hindrances <span class="dfhb-dim">({{budgets.hindrance.have}}/{{budgets.hindrance.max}} points)</span></h4>
+        {{#each state.hindrances}}
+        <div class="dfhb-row"><span class="name">{{name}}</span><span class="badge {{severity}}">{{#if (eq severity "major")}}Major (2){{else}}Minor (1){{/if}}</span><button type="button" class="icon" data-action="removeHindrance" data-uuid="{{uuid}}" data-tooltip="Remove"><i class="fa-solid fa-trash"></i></button></div>
+        {{else}}<p class="dfhb-dim">None yet. Taking Hindrances is optional, but they're where extra Edges come from.</p>{{/each}}
+
+        <h4>Spend your points <span class="dfhb-dim">({{budgets.hindrance.left}} left)</span></h4>
+        {{#each spendRows}}
+        <div class="dfhb-row spend"><span class="name">{{label}} <span class="dfhb-dim">({{cost}} pt{{#if (gt cost 1)}}s{{/if}})</span></span>
+          <span class="ctr"><button type="button" class="icon" data-action="spendMinus" data-key="{{key}}"><i class="fa-solid fa-minus"></i></button><b>{{n}}</b><button type="button" class="icon" data-action="spendPlus" data-key="{{key}}"><i class="fa-solid fa-plus"></i></button></span></div>
+        {{/each}}
+      </div>
+      <div class="dfhb-pick">
+        <input type="search" data-field="filter" value="{{filter}}" placeholder="Search Hindrances…">
+        <div class="dfhb-list">
+          {{#each hindranceList}}
+          <div class="dfhb-item">
+            <div class="dfhb-item-head">
+              <button type="button" class="link" data-action="toggleDesc" data-uuid="{{uuid}}"><i class="fa-solid fa-chevron-{{#if open}}down{{else}}right{{/if}}"></i> {{name}}</button>
+              <span class="src">{{source}}</span>
+              <span class="btns">
+                {{#if canMinor}}<button type="button" class="sm" data-action="addHindrance" data-uuid="{{uuid}}" data-severity="minor">Minor</button>{{/if}}
+                {{#if canMajor}}<button type="button" class="sm major" data-action="addHindrance" data-uuid="{{uuid}}" data-severity="major">Major</button>{{/if}}
+              </span>
+            </div>
+            {{#if open}}<p class="desc">{{desc}}</p>{{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== ATTRIBUTES ========== --}}
+    {{#if (eq step "attributes")}}
+    <div class="dfhb-attr-table">
+      {{#each attrRows}}
+      <div class="dfhb-attr-row">
+        <div class="lbl"><b>{{label}}</b><span class="dfhb-dim">{{linked}}</span></div>
+        <div class="ctr"><button type="button" class="icon" data-action="attrDown" data-key="{{key}}" {{#unless canDown}}disabled{{/unless}}><i class="fa-solid fa-minus"></i></button><span class="die">d{{sides}}</span><button type="button" class="icon" data-action="attrUp" data-key="{{key}}" {{#unless canUp}}disabled{{/unless}}><i class="fa-solid fa-plus"></i></button></div>
+      </div>
+      {{/each}}
+    </div>
+    <p class="dfhb-dim">Tip: a d8 in your main attribute and d6 in two others is the classic start. Strength d4 is fine if you never plan to swing anything heavier than a knife.</p>
+    {{/if}}
+
+    {{!-- ========== SKILLS ========== --}}
+    {{#if (eq step "skills")}}
+    <div class="dfhb-two">
+      <div class="dfhb-chosen">
+        <h4>Your skills <span class="dfhb-dim">({{budgets.skills.left}} of {{budgets.skills.max}} points left)</span></h4>
+        {{#each skillRows}}
+        <div class="dfhb-row skill {{#if above}}above{{/if}}">
+          <span class="name">{{#if core}}<i class="fa-solid fa-star" data-tooltip="Core skill — free at d4"></i> {{/if}}{{name}} <span class="dfhb-dim">({{attrLabel}} d{{attrSides}})</span></span>
+          <span class="ctr"><button type="button" class="icon" data-action="skillDown" data-uuid="{{uuid}}" {{#unless canDown}}disabled{{/unless}}><i class="fa-solid fa-minus"></i></button><span class="die">d{{sides}}</span><button type="button" class="icon" data-action="skillUp" data-uuid="{{uuid}}" {{#unless canUp}}disabled{{/unless}} data-tooltip="{{#if nextCost}}Next step costs {{nextCost}}{{else}}Maxed{{/if}}"><i class="fa-solid fa-plus"></i></button></span>
+          <span class="cost dfhb-dim">{{cost}} pt</span>
+        </div>
+        {{/each}}
+        <p class="dfhb-dim">Steps above the linked attribute cost 2 (shown in amber).</p>
+      </div>
+      <div class="dfhb-pick">
+        <input type="search" data-field="filter" value="{{filter}}" placeholder="Add a skill…">
+        <div class="dfhb-list">
+          {{#each skillList}}
+          <div class="dfhb-item">
+            <div class="dfhb-item-head">
+              <button type="button" class="link" data-action="toggleDesc" data-uuid="{{uuid}}"><i class="fa-solid fa-chevron-{{#if open}}down{{else}}right{{/if}}"></i> {{name}} <span class="dfhb-dim">({{attrLabel}})</span></button>
+              <span class="src">{{source}}</span>
+              <span class="btns"><button type="button" class="sm" data-action="addSkill" data-uuid="{{uuid}}">Add d4</button></span>
+            </div>
+            {{#if open}}<p class="desc">{{desc}}</p>{{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== EDGES ========== --}}
+    {{#if (eq step "edges")}}
+    <div class="dfhb-two">
+      <div class="dfhb-chosen">
+        <h4>Your Edges <span class="dfhb-dim">({{budgets.edges.left}} of {{budgets.edges.max}} slots left)</span></h4>
+        {{#each edgeRows}}
+        <div class="dfhb-row"><span class="name">{{#if isAB}}<i class="fa-solid fa-wand-sparkles"></i> {{/if}}{{name}}{{#unless req.ok}} <span class="badge bad" data-tooltip="{{req.reasons}}">needs {{req.reasons}}</span>{{/unless}}</span><button type="button" class="icon" data-action="removeEdge" data-uuid="{{uuid}}"><i class="fa-solid fa-trash"></i></button></div>
+        {{else}}<p class="dfhb-dim">No Edges yet. You have {{budgets.edges.max}} slot{{#if (gt budgets.edges.max 1)}}s{{/if}}.</p>{{/each}}
+        <p class="dfhb-dim">Want to cast? Take an <b>Arcane Background</b> Edge and a Powers step appears.</p>
+      </div>
+      <div class="dfhb-pick">
+        <div class="dfhb-pick-tools">
+          <input type="search" data-field="filter" value="{{filter}}" placeholder="Search Edges…">
+          <label class="chk"><input type="checkbox" data-action="toggleQualified" {{#if qualifiedOnly}}checked{{/if}}> Only ones I qualify for</label>
+        </div>
+        <div class="dfhb-list">
+          {{#each edgeList}}
+          <div class="dfhb-item {{#unless req.ok}}unmet{{/unless}}">
+            <div class="dfhb-item-head">
+              <button type="button" class="link" data-action="toggleDesc" data-uuid="{{uuid}}"><i class="fa-solid fa-chevron-{{#if open}}down{{else}}right{{/if}}"></i> {{#if isAB}}<i class="fa-solid fa-wand-sparkles"></i> {{/if}}{{name}}</button>
+              <span class="req {{#unless req.ok}}bad{{/unless}}">{{labels}}</span>
+              <span class="src">{{source}}</span>
+              <span class="btns"><button type="button" class="sm" data-action="addEdge" data-uuid="{{uuid}}" {{#unless req.ok}}disabled data-tooltip="Needs {{req.reasons}}"{{/unless}}>Take</button></span>
+            </div>
+            {{#if open}}<p class="desc">{{desc}}</p>{{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== ARCANE ========== --}}
+    {{#if (eq step "arcane")}}
+    <div class="dfhb-two">
+      <div class="dfhb-chosen">
+        <h4>{{arcane.edgeName}}</h4>
+        <p>Arcane skill: <b>{{arcane.skill}}</b> · Starting powers: <b>{{arcane.powers}}</b> · Power Points: <b>{{arcane.pp}}</b>{{#if arcane.verify}} <span class="dfhb-dim">(Companion values — Marshal, please confirm)</span>{{/if}}</p>
+        {{#unless arcane.hasSkill}}<div class="dfhb-alert">You don't have {{arcane.skill}} yet. <button type="button" class="sm" data-action="addArcaneSkill">Add {{arcane.skill}} d4 (1 skill point)</button> — then go back to Skills to raise it.</div>{{/unless}}
+        <h4>Your powers <span class="dfhb-dim">({{arcane.left}} more to pick)</span></h4>
+        {{#each powerRows}}<div class="dfhb-row"><span class="name">{{#if locked}}<i class="fa-solid fa-lock" data-tooltip="Comes with your Arcane Background"></i> {{/if}}{{name}} <span class="dfhb-dim">{{pp}} PP</span></span>{{#unless locked}}<button type="button" class="icon" data-action="removePower" data-uuid="{{uuid}}"><i class="fa-solid fa-trash"></i></button>{{/unless}}</div>{{else}}<p class="dfhb-dim">Nothing chosen yet.</p>{{/each}}
+      </div>
+      <div class="dfhb-pick">
+        <input type="search" data-field="filter" value="{{filter}}" placeholder="Search powers…">
+        <div class="dfhb-list">
+          {{#each powerList}}
+          <div class="dfhb-item">
+            <div class="dfhb-item-head">
+              <button type="button" class="link" data-action="toggleDesc" data-uuid="{{uuid}}"><i class="fa-solid fa-chevron-{{#if open}}down{{else}}right{{/if}}"></i> {{name}}</button>
+              <span class="req">{{pp}} PP · {{range}} · {{duration}}</span>
+              <span class="src">{{source}}</span>
+              <span class="btns"><button type="button" class="sm" data-action="addPower" data-uuid="{{uuid}}">Take</button></span>
+            </div>
+            {{#if open}}<p class="desc">{{desc}}</p>{{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== GEAR ========== --}}
+    {{#if (eq step "gear")}}
+    <div class="dfhb-two">
+      <div class="dfhb-chosen">
+        <h4>Your gear <span class="dfhb-dim">(${{budgets.funds.spent}} spent, ${{budgets.funds.left}} left)</span></h4>
+        {{#each gearRows}}
+        <div class="dfhb-row gear"><span class="name">{{name}}</span><input type="number" class="qty" min="1" data-field="qty" data-uuid="{{uuid}}" value="{{qty}}"><span class="price">${{total}}</span><button type="button" class="icon" data-action="removeGear" data-uuid="{{uuid}}"><i class="fa-solid fa-minus"></i></button></div>
+        {{else}}<p class="dfhb-dim">Nothing yet.</p>{{/each}}
+        <button type="button" class="sm" data-action="commonKit"><i class="fa-solid fa-suitcase"></i> Add the common kit (bedroll, canteen, rope, mess kit, backpack)</button>
+      </div>
+      <div class="dfhb-pick">
+        <div class="dfhb-tabs">{{#each gearTabs}}<button type="button" class="tab {{#if active}}active{{/if}}" data-action="gearTab" data-tab="{{key}}">{{label}}</button>{{/each}}</div>
+        <input type="search" data-field="filter" value="{{filter}}" placeholder="Search…">
+        <div class="dfhb-list">
+          {{#each gearList}}
+          <div class="dfhb-item">
+            <div class="dfhb-item-head">
+              <button type="button" class="link" data-action="toggleDesc" data-uuid="{{uuid}}"><i class="fa-solid fa-chevron-{{#if open}}down{{else}}right{{/if}}"></i> {{name}}</button>
+              <span class="req">{{#if damage}}{{damage}} · {{/if}}{{#if range}}{{range}} · {{/if}}{{#if armor}}Armor {{armor}} · {{/if}}{{weight}} lb · <span class="src">{{type}}</span></span>
+              <span class="price">${{price}}</span>
+              <span class="btns"><button type="button" class="sm" data-action="addGear" data-uuid="{{uuid}}">Buy</button></span>
+            </div>
+            {{#if open}}<p class="desc">{{desc}}{{#if notes}} <i>{{notes}}</i>{{/if}}</p>{{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{!-- ========== REVIEW ========== --}}
+    {{#if (eq step "review")}}
+    <div class="dfhb-review">
+      <div class="dfhb-review-head">
+        {{#if state.img}}<img src="{{state.img}}" alt="">{{/if}}
+        <div><h2>{{#if state.name}}{{state.name}}{{else}}<span class="dfhb-dim">Unnamed hero</span>{{/if}}</h2><p class="dfhb-dim">{{state.concept}}</p></div>
+      </div>
+      {{#if validation.errors.length}}<div class="dfhb-alert bad"><b>Fix before finishing:</b><ul>{{#each validation.errors}}<li>{{this}}</li>{{/each}}</ul></div>{{/if}}
+      {{#if validation.warnings.length}}<div class="dfhb-alert warn"><b>Worth a look:</b><ul>{{#each validation.warnings}}<li>{{this}}</li>{{/each}}</ul></div>{{/if}}
+      <dl class="dfhb-summary">
+        <dt>Attributes</dt><dd>{{summary.attrs}}</dd>
+        <dt>Derived</dt><dd>Pace {{derived.pace}}, Parry {{derived.parry}}, Toughness {{derived.toughness}}{{#if derived.armor}} ({{derived.armor}}){{/if}}</dd>
+        <dt>Skills</dt><dd>{{summary.skills}}</dd>
+        <dt>Hindrances</dt><dd>{{summary.hindrances}}</dd>
+        <dt>Edges</dt><dd>{{summary.edges}}</dd>
+        {{#if state.arcane}}<dt>Powers</dt><dd>{{state.arcane.edgeName}} — {{summary.powers}} ({{state.arcane.pp}} PP)</dd>{{/if}}
+        <dt>Gear</dt><dd>{{summary.gear}} — ${{budgets.funds.left}} left</dd>
+      </dl>
+      <button type="button" class="dfhb-primary big" data-action="finish" {{#if validation.errors.length}}disabled{{/if}}><i class="fa-solid fa-check"></i> Create my hero</button>
+    </div>
+    {{/if}}
+  </section>
+
+  <footer class="dfhb-footer">
+    <button type="button" data-action="back" {{#if isFirst}}disabled{{/if}}><i class="fa-solid fa-arrow-left"></i> Back</button>
+    <span class="dfhb-dim">Step {{#each steps}}{{#if active}}{{index}}{{/if}}{{/each}} of {{steps.length}}</span>
+    <button type="button" class="dfhb-primary" data-action="next" {{#if isLast}}disabled{{/if}}>Next <i class="fa-solid fa-arrow-right"></i></button>
+  </footer>
+</div>

@@ -1,0 +1,53 @@
+{
+ "arcane-background-blessed": {
+  "arcane": "Miracles",
+  "skill": "Faith",
+  "powers": 3,
+  "pp": 15,
+  "required": ["holy symbol"],
+  "powerList": ["arcane protection", "banish", "barrier", "beast friend", "blind", "boost/lower trait", "confusion", "deflection", "detect arcana", "dispel", "divination", "elemental manipulation", "empathy", "environmental protection", "havoc", "healing", "holy symbol", "light", "protection", "relief", "resurrection", "sanctify", "sloth/speed", "smite", "speak language", "stun", "warrior's gift"]
+ },
+ "arcane-background-chi-master": {
+  "arcane": "Chi",
+  "skill": "Focus",
+  "powers": 3,
+  "pp": 15,
+  "required": ["deflection"],
+  "powerList": ["arcane protection", "boost/lower trait", "burrow", "curse", "darksight", "deflection", "detect arcana", "empathy", "environmental protection", "farsight", "healing", "numb", "protection", "relief", "sloth/speed", "smite", "wall walker", "warrior's gift"]
+ },
+ "arcane-background-huckster": {
+  "arcane": "Huckster",
+  "skill": "Spellcasting",
+  "powers": 3,
+  "pp": 10,
+  "powerList": ["ammo whammy", "arcane protection", "barrier", "beast friend", "blind", "bolt", "boost/lower trait", "burst", "confusion", "damage field", "deflection", "detect/conceal arcana", "disguise", "dispel", "divination", "elemental manipulation", "empathy", "entangle", "environmental protection", "farsight", "fear", "havoc", "illusion", "intangibility", "invisibility", "light/darkness", "numb", "object reading", "protection", "puppet", "sloth/speed", "slumber", "sound/silence", "speak language", "stun", "summon ally", "telekinesis", "teleport", "trinkets", "wall walker"]
+ },
+ "arcane-background-mad-scientist": {
+  "arcane": "Mad Scientist",
+  "skill": "Weird Science",
+  "powers": 2,
+  "pp": 15,
+  "powerList": ["arcane protection", "barrier", "beast friend", "blast", "blind", "bolt", "boost/lower trait", "burrow", "burst", "confusion", "damage field", "darksight", "deflection", "detect/conceal arcana", "disguise", "dispel", "elemental manipulation", "empathy", "entangle", "environmental protection", "farsight", "fear", "fly", "havoc", "healing", "illusion", "intangibility", "invisibility", "light/darkness", "mind wipe", "numb", "protection", "puppet", "relief", "shrink", "sloth/speed", "slumber", "smite", "sound/silence", "speak language", "stun", "telekinesis", "teleport", "wall walker", "warrior's gift", "zombie"]
+ },
+ "arcane-background-shaman": {
+  "arcane": "Shaman",
+  "skill": "Faith",
+  "powers": 2,
+  "pp": 15,
+  "powerList": ["arcane protection", "banish", "beast friend", "blind", "boost/lower trait", "burrow", "confusion", "curse", "darksight", "deflection", "detect/conceal arcana", "disguise", "dispel", "divination", "elemental manipulation", "empathy", "entangle", "environmental protection", "farsight", "fear", "growth", "havoc", "healing", "holy symbol", "intangibility", "numb", "protection", "relief", "resurrection", "sanctify", "shape change", "sloth/speed", "slumber", "smite", "speak language", "summon ally", "teleport", "wall walker", "warrior's gift", "wilderness walk"]
+ },
+ "arcane-background-voodooist": {
+  "arcane": "Voodoo",
+  "skill": "Faith",
+  "powers": 3,
+  "pp": 15,
+  "verify": true
+ },
+ "arcane-background-witch": {
+  "arcane": "Witchcraft",
+  "skill": "Spellcasting",
+  "powers": 3,
+  "pp": 15,
+  "verify": true
+ }
+}
